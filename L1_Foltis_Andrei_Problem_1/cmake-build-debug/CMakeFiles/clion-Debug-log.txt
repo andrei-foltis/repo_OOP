@@ -1,0 +1,1 @@
+CMakeLists.txt not found in C:\OOP\lab_oop\L1_Foltis_Andrei_Problem_1 Select CMakeLists.txt
