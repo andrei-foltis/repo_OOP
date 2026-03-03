@@ -1,5 +1,6 @@
 #include <iostream>
 
+//Funktion aproximiert Wurzel
 float wurzel(float n) {
     float i=0;
     while (i*i<=n){
@@ -23,13 +24,16 @@ bool isprime(int x) {
     return true;
 }
 
-void print_array(int v[], int n) {
-    for (int i=0; i<n; i++) {
-        std::cout<<v[i]<<" ";
+//Funkton druckt den Elementen von st bis fin einer array
+void print_array(int v[], int st, int fin) {
+    while (st<=fin) {
+        std::cout<<v[st]<<" ";
+        st++;
     }
     std::cout<<"\n";
 }
 
+//Funktion bestimmt die langste Teilfolge von Zahlen deren Differenz eine Primzahl ist und druckt es aus
 void teilfolge(int v[], int n) {
     int current_len=1;
     int current_st_pos=0;
@@ -52,12 +56,12 @@ void teilfolge(int v[], int n) {
         st_pos=current_st_pos;
         max_len=current_len;
     }
-    int* myarray = new int [n];
-    for (int i=0; i<max_len; i++) {
-        myarray[i]=v[st_pos+i];
-    }
-    print_array(myarray, max_len);
-    delete[] myarray;
+    // int* myarray = new int [n];
+    // for (int i=0; i<max_len; i++) {
+    //     myarray[i]=v[st_pos+i];
+    // }
+    print_array(v, st_pos, st_pos+max_len-1);
+    // delete[] myarray;
 
 }
 

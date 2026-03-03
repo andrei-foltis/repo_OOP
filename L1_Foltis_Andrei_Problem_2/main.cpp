@@ -12,47 +12,60 @@ bool isprime(int x) {
     return true;
 }
 
+//Funktion generiert die ersten n Primzahlen
 void generate_prime(int n) {
     int i=2;
     while (n>0) {
-        while (true){
-            if (isprime(i)) {
-                std::cout<<i<<" ";
-                i++;
-                break;
-            }
-            else {
-                i++;
-            }
+        if (isprime(i)) {
+            std::cout<<i<<" ";
+            i++;
+            n--;
         }
-        n--;
-    }
-}
-
-
-
-bool relativ_prime(int a, int b) {
-    for (int i=2; i<=a && i<=b; i++) {
-        if (a%i==0 && b%i==0) {
-            return false;
+        else {
+            i++;
         }
-    }
-    return true;
-}
-void print_array(int v[], int n) {
-    for (int i=0; i<n; i++) {
-        std::cout<<v[i]<<" ";
     }
     std::cout<<"\n";
 }
 
+
+
+// bool relativ_prime(int a, int b) {
+//     for (int i=2; i<=a && i<=b; i++) {
+//         if (a%i==0 && b%i==0) {
+//             return false;
+//         }
+//     }
+//     return true;
+// }
+
+//falls ggT(en: gcd)=1, dann sind die Zahlen relativ prim
+int gcd(int a, int b) {
+    while (b) {
+        int remainder = a%b;
+        a = b;
+        b = remainder;
+    }
+    return a;
+}
+
+//Funkton druckt den Elementen von st bis fin einer array
+void print_array(int v[], int st, int fin) {
+    while (st<=fin) {
+        std::cout<<v[st]<<" ";
+        st++;
+    }
+    std::cout<<"\n";
+}
+
+//Funktion bestimmt die langste Teilfolge von aufeinanderfolgende Zahlen die relativ Prim sind und druckt es aus
 void teilfolge(int v[], int n){
     int current_len=1;
     int current_st_pos=0;
     int st_pos=-1;
     int max_len=0;
     for (int i=0; i<n-1; i++) {
-        if (relativ_prime(v[i+1],v[i])) {
+        if (gcd(v[i+1],v[i]) == 1) {
             current_len++;
         }
         else {
@@ -68,12 +81,12 @@ void teilfolge(int v[], int n){
         st_pos=current_st_pos;
         max_len=current_len;
     }
-    int* myarray = new int [n];
-    for (int i=0; i<max_len; i++) {
-        myarray[i]=v[st_pos+i];
-    }
-    print_array(myarray, max_len);
-    delete[] myarray;
+    // int* myarray = new int [n];
+    // for (int i=0; i<max_len; i++) {
+    //     myarray[i]=v[st_pos+i];
+    // }
+    print_array(v, st_pos, st_pos+max_len-1);
+    // delete[] myarray;
 }
 
 void point_a() {
